@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <title>The Security Heist - Level System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing Screen -->
+    <div class="container" id="landingScreen">
+        <div class="landing-screen">
+            <h1 class="title">The Security Heist</h1>
+            <p class="subtitle">SECURITY LEVEL: MAXIMUM</p>
+            
+            <div class="level-display">
+                <div class="current-level">LEVEL <span id="currentLevelDisplay">1</span></div>
+                <div class="level-stats">
+                    <span id="levelProgressDisplay">1/10 COMPLETED</span>
+                </div>
+                <div id="masterBadge" class="master-badge hidden">🏆 MASTER THIEF 🏆</div>
+            </div>
+            
+            <div class="level-grid" id="levelGrid">
+                <!-- Levels will be generated here -->
+            </div>
+            
+            <button class="bypass-button" id="bypassButton">START HEIST</button>
+            <button class="instructions-button" id="instructionsButton">
+                <span class="instructions-icon">ℹ️</span> HOW TO PLAY
+            </button>
+        </div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div class="instructions-modal" id="instructionsModal">
+        <div class="instructions-content">
+            <button class="close-button" id="closeInstructions">×</button>
+            <h2 class="instructions-title">🍫 HOW TO PLAY</h2>
+            
+            <div class="instruction-section">
+                <div class="instruction-icon">🔴</div>
+                <div class="instruction-text">
+                    <h3>RED NODES - TARGET</h3>
+                    <p>Click ALL red security nodes to neutralize them. You must eliminate every single one to complete the heist!</p>
+                </div>
+            </div>
+
+            <div class="instruction-section">
+                <div class="instruction-icon">🔵</div>
+                <div class="instruction-text">
+                    <h3>BLUE NODES - AVOID!</h3>
+                    <p>These are DECOY nodes! Clicking them will trigger the alarm and you'll be caught. Stay away!</p>
+                </div>
+            </div>
+
+            <div class="instruction-section">
+                <div class="instruction-icon">⏱️</div>
+                <div class="instruction-text">
+                    <h3>BEAT THE CLOCK</h3>
+                    <p>Complete each level before time runs out. The timer turns red when you're running out of time!</p>
+                </div>
+            </div>
+
+            <div class="instruction-section">
+                <div class="instruction-icon">📈</div>
+                <div class="instruction-text">
+                    <h3>LEVEL PROGRESSION</h3>
+                    <p>Complete 10 challenging levels. Each level has more nodes, less time, and faster movement. Master them all to become a legendary thief!</p>
+                </div>
+            </div>
+
+            <button class="start-playing-button" id="startPlayingButton">GOT IT! LET'S GO</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div class="game-screen" id="gameScreen">
+        <div class="game-hud">
+            <div class="hud-item">
+                <div class="hud-label">LEVEL</div>
+                <div class="hud-value" id="gameLevelDisplay">1</div>
+            </div>
+            <div class="hud-item">
+                <div class="hud-label">TIME</div>
+                <div class="hud-value" id="timer">10</div>
+            </div>
+            <div class="hud-item">
+                <div class="hud-label">NODES</div>
+                <div class="hud-value" id="nodesLeft">5</div>
+            </div>
+            <div class="hud-item">
+                <div class="hud-label">STATUS</div>
+                <div class="hud-value" style="font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--gold);">ACTIVE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alarm Screen -->
+    <div class="alarm-screen" id="alarmScreen">
+        <div class="alarm-text">
+            ⚠️ ALARM TRIGGERED ⚠️<br>
+            CAUGHT!
+        </div>
+        <button class="try-again-button" id="tryAgainButton">TRY AGAIN</button>
+    </div>
+
+    <!-- Success Screen -->
+    <div class="success-screen" id="successScreen">
+        <div class="success-message">Worth the risk.</div>
+        <div class="level-complete-info" id="levelCompleteInfo">
+            LEVEL <span id="completedLevel">1</span> COMPLETE
+        </div>
+        <button class="play-again-button" id="nextLevelButton">NEXT LEVEL</button>
+        <button class="play-again-button" id="levelSelectButton">LEVEL SELECT</button>
+    </div>
+
+    <!-- Master Completion Screen -->
+    <div class="master-screen" id="masterScreen">
+        <div class="master-title">Master Thief</div>
+        <div class="master-subtitle">ALL LEVELS CONQUERED</div>
+        
+        <div class="master-stats">
+            <div class="stat-row">
+                <span class="stat-label">TOTAL COMPLETIONS:</span>
+                <span class="stat-value" id="totalCompletions">10</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">PRESTIGE LEVEL:</span>
+                <span class="stat-value" id="prestigeLevel">0</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">STATUS:</span>
+                <span class="stat-value">LEGENDARY</span>
+            </div>
+        </div>
+
+        <div class="master-options">
+            <button class="prestige-button" id="prestigeButton">START NEW GAME+</button>
+            <button class="play-again-button" id="freePlayButton">FREE PLAY MODE</button>
+            <button class="play-again-button" id="mainMenuButton">MAIN MENU</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
